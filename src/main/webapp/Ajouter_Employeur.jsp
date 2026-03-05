@@ -52,9 +52,9 @@
 <body>
 <div class="form-style">
     <h2>Ajouter Employeur</h2>
-    <form action="AjouterEmployeurServlet" method="post">
-        Nom: <input type="text" name="raisonSocial" required>
-        Secteur: <input type="text" name="secteurActivite" required>
+    <form action="Ajouter_Employeur" method="post">
+        Secteur Active: <input type="text" name="secteurActivite" required>
+        Raison Social:<input type="text" name="raisonSocial" required>
         <input type="submit" value="Ajouter">
     </form>
 </div>

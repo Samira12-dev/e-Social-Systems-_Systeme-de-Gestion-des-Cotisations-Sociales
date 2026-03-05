@@ -2,17 +2,29 @@ package com.example.demo1;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "assure")
 public class Assure {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String nom;
+    @Column(name="salaire_mensuel")
     private double salaireMensuel;
 
     @ManyToOne
     @JoinColumn(name="employeur_id")
     private Employeur employeur;
+
+    public Assure(){}
+
+    public Assure( String nom, double salaireMensuel, Employeur employeur) {
+
+        this.nom = nom;
+        this.salaireMensuel = salaireMensuel;
+        this.employeur = employeur;
+    }
+
 
     // getters & setters
     public int getId() { return id; }

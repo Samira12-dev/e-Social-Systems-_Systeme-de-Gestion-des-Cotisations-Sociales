@@ -52,7 +52,7 @@
 <body>
 <div class="form-style">
     <h2>Ajouter Assuré</h2>
-    <form action="AjouterAssureServlet" method="post">
+    <form action="Ajouter_assure" method="post">
         Nom: <input type="text" name="nom" required>
         Salaire Mensuel: <input type="number" step="0.01" name="salaire" required>
         Employeur ID: <input type="number" name="employeurId" required>
