@@ -52,7 +52,7 @@
 <body>
 <div class="form-style">
     <h2>Ajouter Cotisation</h2>
-    <form action="AjouterCotisationServlet" method="post">
+    <form action="Ajouter_Cotisation" method="post">
         Assuré ID: <input type="number" name="assureId" required>
         Déclaration ID: <input type="number" name="declarationId" required>
         Salaire déclaré: <input type="number" name="salaireDeclare">

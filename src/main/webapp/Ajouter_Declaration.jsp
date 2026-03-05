@@ -52,7 +52,7 @@
 <body>
 <div class="form-style">
     <h2>Ajouter Déclaration</h2>
-    <form action="AjouterDeclarationServlet" method="post">
+    <form action="Ajouter_Declaration" method="post">
         Employeur ID: <input type="number" name="employeurId" required>
         Mois: <input type="number" name="mois" required>
         Année: <input type="number" name="annee" required>

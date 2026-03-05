@@ -8,6 +8,7 @@ public class Cotisation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private  int count=0;
     private double salaire_declare;
     private double  cotisation_salaire;
     private double coisation_patronale;
@@ -21,9 +22,9 @@ public class Cotisation {
     private Assure assure;
      public Cotisation(){}
 
-    public Cotisation(int id, double salaire_declare, double cotisation_salaire,
+    public Cotisation(double salaire_declare, double cotisation_salaire,
                       double coisation_patronale, Declaration declaration, Assure assure) {
-        this.id = id;
+        this.id = count++;
         this.salaire_declare = salaire_declare;
         this.cotisation_salaire = cotisation_salaire;
         this.coisation_patronale = coisation_patronale;
