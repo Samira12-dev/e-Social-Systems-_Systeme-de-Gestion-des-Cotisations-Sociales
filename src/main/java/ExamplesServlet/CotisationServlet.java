@@ -1,9 +1,9 @@
 package ExamplesServlet;
 
-import com.example.demo1.Assure;
-import com.example.demo1.Cotisation;
-import com.example.demo1.Declaration;
-import com.example.demo1.Employeur;
+import com.e_social.repository.AssureRepo;
+import com.e_social.repository.CotisationRepo;
+import com.e_social.repository.DeclarationRepo;
+import com.example.demo1.*;
 import e_Social.jpaUtil.jPA;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.ServletException;
@@ -13,9 +13,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/Ajouter_Cotisation")
 public class CotisationServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+        CotisationRepo cotisationRepo= new CotisationRepo();
+        if("list".equals(action)){
+            List<Cotisation> cotisationList=cotisationRepo.findAll();
+            req.setAttribute("cotisation",cotisationList);
+            req.getRequestDispatcher("index.jsp").forward(req,resp);
+        }
+
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        String id_As= req.getParameter("assureId");
@@ -29,17 +42,21 @@ public class CotisationServlet extends HttpServlet {
        double salaireDr= Double.parseDouble(salaireDeclare);
        double cotsalairy= Double.parseDouble(cotSalariale);
        double cotPartonal= Double.parseDouble(cotPatronale);
-        EntityManager et= jPA.getEntityManager();
-        Assure as= et.find(Assure.class,id_as);
-        Declaration dl= et.find(Declaration.class,id_dr);
 
-        Cotisation cotisation= new Cotisation(salaireDr,cotsalairy,cotPartonal,dl,as);
+                try {
+                    Assure as= new  AssureRepo().findId(id_as);
+                    Declaration dl= new DeclarationRepo().findId(id_dr);
 
-        try {
-            et.getTransaction().begin();
-            et.persist(cotisation);
-            et.getTransaction().commit();
-            resp.sendRedirect("index.jsp");
+                    CotisationService service=new CotisationService();
+                    Cotisation cotisation =service.calculerCotisation(salaireDr);
+
+                    cotisation.setAssure(as);
+                    cotisation.setDeclaration(dl);
+                    cotisation.setSalaire_declare(salaireDr);
+
+                    CotisationRepo cotisationRepo= new CotisationRepo();
+                    cotisationRepo.save(cotisation);
+                 resp.sendRedirect("Ajouter_Cotisation?action=list");
 
         }catch (Exception e){
             e.printStackTrace();

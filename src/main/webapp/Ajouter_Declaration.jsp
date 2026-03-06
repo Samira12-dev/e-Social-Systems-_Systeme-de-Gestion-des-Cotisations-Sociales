@@ -53,6 +53,7 @@
 <div class="form-style">
     <h2>Ajouter Déclaration</h2>
     <form action="Ajouter_Declaration" method="post">
+        <input type="hidden" name="action" value="create">
         Employeur ID: <input type="number" name="employeurId" required>
         Mois: <input type="number" name="mois" required>
         Année: <input type="number" name="annee" required>

@@ -53,6 +53,7 @@
 <div class="form-style">
     <h2>Ajouter Employeur</h2>
     <form action="Ajouter_Employeur" method="post">
+        <input type="hidden" name="action" value="create">
         Secteur Active: <input type="text" name="secteurActivite" required>
         Raison Social:<input type="text" name="raisonSocial" required>
         <input type="submit" value="Ajouter">

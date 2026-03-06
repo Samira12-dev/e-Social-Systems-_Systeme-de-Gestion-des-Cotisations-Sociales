@@ -9,8 +9,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
+
 @WebServlet("/Ajouter_Employeur")
 public class EmployeurServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action= req.getParameter("action");
+        EmployeurRepo rep= new EmployeurRepo();
+        if("list".equals(action)){
+            List<Employeur> list =rep.findAll();
+            req.setAttribute("employeurs",list);
+            req.getRequestDispatcher("index.jsp").forward(req,resp);
+        }
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -23,6 +36,6 @@ public class EmployeurServlet extends HttpServlet {
         EmployeurRepo rep= new EmployeurRepo();
 
         rep.save(emp);
-        resp.sendRedirect("index.jsp");
+        resp.sendRedirect("Ajouter_Employeur?action=list");
     }
 }

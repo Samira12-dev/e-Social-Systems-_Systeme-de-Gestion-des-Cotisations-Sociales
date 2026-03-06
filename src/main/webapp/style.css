@@ -97,3 +97,5 @@ form input[type="submit"] {
 form input[type="submit"]:hover {
     background-color: #1e8449;
 }
+a { text-decoration: none; color: #16a085; font-weight: bold; }
+a:hover { color: #138d75; }
